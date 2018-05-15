@@ -8,8 +8,17 @@
  * @version 1.0
  */
 
-class PayamakSefid_GetToken {
+class PayamakSefid_GetBankTransactionsByPageId {
 	
+	/**
+	* Get Bank Transactions By PageId Url.
+	*
+    * @return string Indicates the Url
+	*/
+	protected function GetBankTransactionsByPageIdUrl() {
+		return "https://api.sms.ir/users/v1/BankTransaction/GetBankTransactionsByPageId";
+	}
+
 	/**
 	* gets Api Token Url.
 	*
@@ -30,13 +39,42 @@ class PayamakSefid_GetToken {
 		$this->APIKey = $APIKey;
 		$this->SecretKey = $SecretKey;
     }	
+
+	/**
+	* Get Bank Transactions By PageId.
+	*
+	* @param string $PageId Transactions PageId
+    * @return string Indicates the Bank Transactions result
+	*/
+	public function GetBankTransactionsByPageId($PageId) {
+		
+		$token = $this->GetToken($this->APIKey, $this->SecretKey);
+
+		if($token != false){
+
+			$url = $this->GetBankTransactionsByPageIdUrl()."?PageId=".$PageId;
+			$GetBankTransactionsByPageId = $this->execute($url, $token);
+			
+			$object = json_decode($GetBankTransactionsByPageId);
+
+			if(is_object($object)){
+				$result = $object;
+			} else {
+				$result = 'Error Getting Object.';
+			}
+			
+		} else {
+			$result = 'Error Getting Token Key.';
+		}
+		return $result;
+	}
 	
 	/**
 	* gets token key for all web service requests.
 	*
     * @return string Indicates the token key
 	*/
-	public function GetToken(){
+	private function GetToken(){
 		$postData = array(
 			'UserApiKey' => $this->APIKey,
 			'SecretKey' => $this->SecretKey
@@ -59,15 +97,41 @@ class PayamakSefid_GetToken {
 		curl_close($ch);
 		
 		$response = json_decode($result);
+		
 		if(is_object($response)){
 			if($response->IsSuccessful == true){
 				@$resp = $response->TokenKey;
 			} else {
-				$resp = $response->Message;
+				$resp = false;
 			}
 		}
 		
 		return $resp;
+	}
+	
+	/**
+	* executes the main method.
+	*
+	* @param string $url url
+	* @param string $token token string
+    * @return string Indicates the curl execute result
+	*/
+	private function execute($url, $token){
+		
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+											'Content-Type: application/json',
+											'x-sms-ir-secure-token: '.$token
+											));		
+		curl_setopt($ch, CURLOPT_HEADER, false);
+		curl_setopt($ch, CURLOPT_VERBOSE, true);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
 	}
 }
 

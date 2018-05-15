@@ -12,19 +12,21 @@ try {
 	
 	date_default_timezone_set("Asia/Tehran");
 	
-	include_once("Classes/GetToken.php");
+	include_once("Classes/GetBankTransactionsFromLastId.php");
 
 	// your PayamakSefid panel configuration
 	$APIKey = 'enter your api key ...';
 	$SecretKey = 'enter your secret key ...';
-
-	$PayamakSefid_GetToken = new PayamakSefid_GetToken($APIKey,$SecretKey);
-	$GetToken = $PayamakSefid_GetToken->GetToken();
+	
+	$LastId = 0;
+	
+	$PayamakSefid_GetBankTransactionsFromLastId = new PayamakSefid_GetBankTransactionsFromLastId($APIKey,$SecretKey);
+	$GetBankTransactionsFromLastId = $PayamakSefid_GetBankTransactionsFromLastId->GetBankTransactionsFromLastId($LastId);
 	echo "<pre>";
-	var_dump($GetToken);
+	var_dump($GetBankTransactionsFromLastId);
 	
 } catch (Exeption $e) {
-	echo 'Error GetToken : '.$e->getMessage();
+	echo 'Error GetBankTransactionsFromLastId : '.$e->getMessage();
 }
 
 ?>

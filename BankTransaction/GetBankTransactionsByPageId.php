@@ -3,35 +3,30 @@
 /**
  * @author Pejman Kheyri
  * @author Pejman Kheyri <pejmankheyri@gmail.com>
- * @copyright © 2017 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
- * @link http://sms.ir/ Documentation of sms.ir RESTful API PHP sample.
- * @version 1.1
+ * @copyright © 2018 The Ide Pardazan (ipe.ir) PHP Group. All rights reserved.
+ * @link https://web.sms.ir/ Documentation of PayamakSefid RESTful API PHP sample.
+ * @version 1.0
  */
 
 try {
 	
 	date_default_timezone_set("Asia/Tehran");
 	
-	include_once("Classes/AddContactToCustomerClub.php");
+	include_once("Classes/GetBankTransactionsByPageId.php");
 
-	// your sms.ir panel configuration
-	$APIKey = "enter your api key ...";
-	$SecretKey = "enter your secret key ...";
+	// your PayamakSefid panel configuration
+	$APIKey = 'enter your api key ...';
+	$SecretKey = 'enter your secret key ...';
 	
-	// contact information
-	$Prefix = 'Mr';
-	$FirstName = 'FirstName';
-	$LastName = 'LastName';
-	$Mobile = '091xxxxxxxx';
-	$BirthDay = '1370/01/01';
-	$CategoryId = '';
-
-	$SmsIR_AddContactToCustomerClub = new SmsIR_AddContactToCustomerClub($APIKey,$SecretKey);
-	$AddContactToCustomerClub = $SmsIR_AddContactToCustomerClub->AddContactToCustomerClub($Prefix, $FirstName, $LastName, $Mobile, $BirthDay, $CategoryId);
-	var_dump($AddContactToCustomerClub);
+	$PageId = 0;
+	
+	$PayamakSefid_GetBankTransactionsByPageId = new PayamakSefid_GetBankTransactionsByPageId($APIKey,$SecretKey);
+	$GetBankTransactionsByPageId = $PayamakSefid_GetBankTransactionsByPageId->GetBankTransactionsByPageId($PageId);
+	echo "<pre>";
+	var_dump($GetBankTransactionsByPageId);
 	
 } catch (Exeption $e) {
-	echo 'Error AddContactToCustomerClub : '.$e->getMessage();
+	echo 'Error GetBankTransactionsByPageId : '.$e->getMessage();
 }
 
 ?>
