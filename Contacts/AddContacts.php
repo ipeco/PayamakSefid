@@ -15,28 +15,28 @@ try {
 	include_once("Classes/AddContacts.php");
 
 	// your PayamakSefid panel configuration
-	$APIKey = '6311c7e7bfcd95a9e3acc4c';
-	$SecretKey = 'R!O$$i3@5j%3!%O';
+	$APIKey = 'enter your api key ...';
+	$SecretKey = 'enter your secret key ...';
 	
 	// add contacts data
 	$ContactsData = array(
 		"ContactsDetails" => array(
 			array(
 				"Prefix" => "Mr",
-				"FirstName" => "pejman",
-				"LastName" => "kheyri",
-				"Mobile" => 9129341912,
+				"FirstName" => "Name",
+				"LastName" => "Family",
+				"Mobile" => 912xxxxxxx,
 				"EmojiId" => 1
 			),
 			array(
-				"Prefix" => "MRS",
-				"FirstName" => "sample",
-				"LastName" => "sample2",
-				"Mobile" => 9120000000,
+				"Prefix" => "Mr",
+				"FirstName" => "Name",
+				"LastName" => "Family",
+				"Mobile" => 912xxxxxxx,
 				"EmojiId" => 1
 			)			
 		),
-		"GroupId" => 5622
+		"GroupId" => 0
 	);
 	
 	$PayamakSefid_AddContacts = new PayamakSefid_AddContacts($APIKey,$SecretKey);
