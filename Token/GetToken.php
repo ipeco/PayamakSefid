@@ -15,8 +15,8 @@ try {
 	include_once("Classes/GetToken.php");
 
 	// your sms.ir panel configuration
-	$APIKey = '6311c7e7bfcd95a9e3acc4c';
-	$SecretKey = 'R!O$$i3@5j%3!%O';
+	$APIKey = "enter your api key ...";
+	$SecretKey = "enter your secret key ...";
 
 	$PayamakSefid_GetToken = new PayamakSefid_GetToken($APIKey,$SecretKey);
 	$GetToken = $PayamakSefid_GetToken->GetToken();
