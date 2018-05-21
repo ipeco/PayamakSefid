@@ -8,15 +8,15 @@
  * @version 1.0
  */
 
-class PayamakSefid_AddContacts {
+class PayamakSefid_DeleteGroupContacts {
 	
 	/**
-	* Add Contacts Url.
+	* Delete Group Contacts Url.
 	*
     * @return string Indicates the Url
 	*/
-	protected function AddContactsUrl() {
-		return "https://api.sms.ir/users/v1/Contacts/AddContacts";
+	protected function DeleteGroupContactsUrl() {
+		return "https://api.sms.ir/users/v1/Contacts/DeleteGroupContacts";
 	}
 
 	/**
@@ -41,21 +41,21 @@ class PayamakSefid_AddContacts {
     }	
 
 	/**
-	* Add Contacts.
+	* Delete Group Contacts.
 	*
-	* @param string $ContactsData Contacts Data
-    * @return string Indicates the Add Contacts result
+	* @param string $GroupIds Group Ids
+    * @return string Indicates the Delete Group Contacts result
 	*/
-	public function AddContacts($ContactsData) {
+	public function DeleteGroupContacts($GroupIds) {
 		
 		$token = $this->GetToken($this->APIKey, $this->SecretKey);
 
 		if($token != false){
 
-			$url = $this->AddContactsUrl();
-			$AddContacts = $this->execute($ContactsData, $url, $token);
+			$url = $this->DeleteGroupContactsUrl();
+			$DeleteGroupContacts = $this->execute($GroupIds, $url, $token);
 			
-			$object = json_decode($AddContacts);
+			$object = json_decode($DeleteGroupContacts);
 
 			if(is_object($object)){
 				$result = $object;

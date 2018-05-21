@@ -8,15 +8,15 @@
  * @version 1.0
  */
 
-class PayamakSefid_AddContacts {
+class PayamakSefid_TransferContactsToGroup {
 	
 	/**
-	* Add Contacts Url.
+	* Transfer Contacts To Group Url.
 	*
     * @return string Indicates the Url
 	*/
-	protected function AddContactsUrl() {
-		return "https://api.sms.ir/users/v1/Contacts/AddContacts";
+	protected function TransferContactsToGroupUrl() {
+		return "https://api.sms.ir/users/v1/Contacts/TransferContactsToGroup";
 	}
 
 	/**
@@ -41,21 +41,21 @@ class PayamakSefid_AddContacts {
     }	
 
 	/**
-	* Add Contacts.
+	* Transfer Contacts To Group.
 	*
-	* @param string $ContactsData Contacts Data
-    * @return string Indicates the Add Contacts result
+	* @param string $ContactsGroup Contacts Group
+    * @return string Indicates the Transfer Contacts To Group result
 	*/
-	public function AddContacts($ContactsData) {
+	public function TransferContactsToGroup($ContactsGroup) {
 		
 		$token = $this->GetToken($this->APIKey, $this->SecretKey);
 
 		if($token != false){
 
-			$url = $this->AddContactsUrl();
-			$AddContacts = $this->execute($ContactsData, $url, $token);
+			$url = $this->TransferContactsToGroupUrl();
+			$TransferContactsToGroup = $this->execute($ContactsGroup, $url, $token);
 			
-			$object = json_decode($AddContacts);
+			$object = json_decode($TransferContactsToGroup);
 
 			if(is_object($object)){
 				$result = $object;

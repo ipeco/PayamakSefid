@@ -8,15 +8,15 @@
  * @version 1.0
  */
 
-class PayamakSefid_AddContacts {
+class PayamakSefid_GetContactsFromLastId {
 	
 	/**
-	* Add Contacts Url.
+	* Get Contacts From LastId Url.
 	*
     * @return string Indicates the Url
 	*/
-	protected function AddContactsUrl() {
-		return "https://api.sms.ir/users/v1/Contacts/AddContacts";
+	protected function GetContactsFromLastIdUrl() {
+		return "https://api.sms.ir/users/v1/Contacts/GetContactsFromLastId";
 	}
 
 	/**
@@ -41,21 +41,21 @@ class PayamakSefid_AddContacts {
     }	
 
 	/**
-	* Add Contacts.
+	* Get Contacts From LastId.
 	*
-	* @param string $ContactsData Contacts Data
-    * @return string Indicates the Add Contacts result
+	* @param string $lastId lastId
+    * @return string Indicates the Get Contacts From LastId result
 	*/
-	public function AddContacts($ContactsData) {
+	public function GetContactsFromLastId($lastId) {
 		
 		$token = $this->GetToken($this->APIKey, $this->SecretKey);
 
 		if($token != false){
 
-			$url = $this->AddContactsUrl();
-			$AddContacts = $this->execute($ContactsData, $url, $token);
+			$url = $this->GetContactsFromLastIdUrl()."?lastId=".$lastId;
+			$GetContactsFromLastId = $this->execute($url, $token);
 			
-			$object = json_decode($AddContacts);
+			$object = json_decode($GetContactsFromLastId);
 
 			if(is_object($object)){
 				$result = $object;
@@ -116,9 +116,7 @@ class PayamakSefid_AddContacts {
 	* @param string $token token string
     * @return string Indicates the curl execute result
 	*/
-	private function execute($postData, $url, $token){
-		
-		$postString = json_encode($postData);
+	private function execute($url, $token){
 		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -130,11 +128,8 @@ class PayamakSefid_AddContacts {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($ch, CURLOPT_POST, count($postString));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
 		
 		$result = curl_exec($ch);
-
 		curl_close($ch);
 		return $result;
 	}

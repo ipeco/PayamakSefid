@@ -8,15 +8,15 @@
  * @version 1.0
  */
 
-class PayamakSefid_AddContacts {
+class PayamakSefid_GetContactsByGroupIdByPageId {
 	
 	/**
-	* Add Contacts Url.
+	* Get Contacts By GroupId By PageId Url.
 	*
     * @return string Indicates the Url
 	*/
-	protected function AddContactsUrl() {
-		return "https://api.sms.ir/users/v1/Contacts/AddContacts";
+	protected function GetContactsByGroupIdByPageIdUrl() {
+		return "https://api.sms.ir/users/v1/Contacts/GetContactsByGroupIdByPageId";
 	}
 
 	/**
@@ -41,21 +41,22 @@ class PayamakSefid_AddContacts {
     }	
 
 	/**
-	* Add Contacts.
+	* Get Contacts By GroupId By PageId.
 	*
-	* @param string $ContactsData Contacts Data
-    * @return string Indicates the Add Contacts result
+	* @param string $groupId groupId
+	* @param string $pageId pageId
+    * @return string Indicates the Get Contacts By GroupId By PageId result
 	*/
-	public function AddContacts($ContactsData) {
+	public function GetContactsByGroupIdByPageId($groupId,$pageId) {
 		
 		$token = $this->GetToken($this->APIKey, $this->SecretKey);
 
 		if($token != false){
 
-			$url = $this->AddContactsUrl();
-			$AddContacts = $this->execute($ContactsData, $url, $token);
+			$url = $this->GetContactsByGroupIdByPageIdUrl()."?groupId=".$groupId."&pageId=".$pageId;
+			$GetContactsByGroupIdByPageId = $this->execute($url, $token);
 			
-			$object = json_decode($AddContacts);
+			$object = json_decode($GetContactsByGroupIdByPageId);
 
 			if(is_object($object)){
 				$result = $object;
@@ -116,9 +117,7 @@ class PayamakSefid_AddContacts {
 	* @param string $token token string
     * @return string Indicates the curl execute result
 	*/
-	private function execute($postData, $url, $token){
-		
-		$postString = json_encode($postData);
+	private function execute($url, $token){
 		
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -130,11 +129,8 @@ class PayamakSefid_AddContacts {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-		curl_setopt($ch, CURLOPT_POST, count($postString));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
 		
 		$result = curl_exec($ch);
-
 		curl_close($ch);
 		return $result;
 	}
