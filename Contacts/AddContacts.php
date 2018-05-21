@@ -20,23 +20,23 @@ try {
 	
 	// add contacts data
 	$ContactsData = array(
-		"ContactsDetails" => array(
+		'ContactsDetails' => array(
 			array(
-				"Prefix" => "Mr",
-				"FirstName" => "Name",
-				"LastName" => "Family",
-				"Mobile" => 912xxxxxxx,
-				"EmojiId" => 1
+				'Prefix' => 'Mr',
+				'FirstName' => 'Name',
+				"LastName" => 'Family',
+				'Mobile' => 912xxxxxxx,
+				'EmojiId' => '1'
 			),
 			array(
-				"Prefix" => "Mr",
-				"FirstName" => "Name",
-				"LastName" => "Family",
-				"Mobile" => 912xxxxxxx,
-				"EmojiId" => 1
-			)			
+				'Prefix' => 'Mr',
+				'FirstName' => 'Name',
+				"LastName" => 'Family',
+				'Mobile' => 912xxxxxxx,
+				'EmojiId' => '1'
+			)
 		),
-		"GroupId" => 0
+		'GroupId' => 0
 	);
 	
 	$PayamakSefid_AddContacts = new PayamakSefid_AddContacts($APIKey,$SecretKey);

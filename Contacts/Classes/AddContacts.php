@@ -133,6 +133,7 @@ class PayamakSefid_AddContacts {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $postString);
 		
 		$result = curl_exec($ch);
+
 		curl_close($ch);
 		return $result;
 	}
